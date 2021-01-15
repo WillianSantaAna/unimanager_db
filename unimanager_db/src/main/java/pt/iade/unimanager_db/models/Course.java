@@ -14,28 +14,26 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "disciplinas")
-public class Unit {
+@Table(name = "cursos")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dis_id")
+    @Column(name = "cur_id")
     private int id;
-    @Column(name = "dis_nome")
+    @Column(name = "cur_nome")
     private String name;
-    @Column(name = "dis_creditos")
-    private int credits;
     @OneToMany
-    @JoinColumn(name = "pla_dis_id")
-    @JsonIgnoreProperties("unit")
+    @JoinColumn(name = "pla_cur_id")
+    @JsonIgnoreProperties("course")
     private List<Plan> plans;
 
-    public Unit() {
+    public Course() {
     }
 
-    public Unit(int id, String name, int credits) {
+    public Course(int id, String name, List<Plan> plans) {
         this.id = id;
         this.name = name;
-        this.credits = credits;
+        this.plans = plans;
     }
 
     public int getId() {
@@ -46,16 +44,7 @@ public class Unit {
         return name;
     }
 
-    public int getCredits() {
-        return credits;
-    }
-
     public List<Plan> getPlans() {
         return plans;
-    }
-
-    @Column(name = "dis_dep_id")
-    public int getDepartmentId() {
-        return 1;
     }
 }

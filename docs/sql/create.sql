@@ -4,7 +4,7 @@ use unimanager_db;
 
 create user 'unimanager'@'localhost' identified by 'unimanager';
 
-grant all privileges on unimanager_db to 'unimanager'@'localhost';
+grant all privileges on unimanager_db.* to 'unimanager'@'localhost';
 
 create table alunos (alu_id int not null auto_increment,
 					 alu_nome varchar(60) not null,
