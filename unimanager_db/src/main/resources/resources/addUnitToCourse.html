@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>University Manager</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/js/addUnitToCourse.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="assets/images/avatar.png" alt="Student Icon">
+        <section>
+            <h1> University Manager </h1>
+            <h3 id="course"> </h3>
+        </section>
+    </header>
+    <nav>
+        <a href="courses.html">List of Courses</a>
+    </nav>
+    <main>
+        <header>
+            <h1> Adding new units </h1>
+        </header>
+        <h4> Choose unit <select id="unit"></select> </h4>
+        <h4> Semester: <select id="semester">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+            </select>
+        </h4>
+        <input type="button" value="Add Unit" onclick="add()">
+        <p id="result"></p>
+    </main>
+</body>
+
+</html>

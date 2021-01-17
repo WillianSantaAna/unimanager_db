@@ -1,5 +1,9 @@
 package pt.iade.unimanager_db.models.repositories;
 
-public class StudentRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import pt.iade.unimanager_db.models.Student;
+
+public interface StudentRepository extends CrudRepository<Student, Integer> {
     
 }

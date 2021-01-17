@@ -1,6 +1,6 @@
 package pt.iade.unimanager_db.models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +50,7 @@ public class Plan {
     @OneToMany
     @JoinColumns({ @JoinColumn(name = "ins_pla_cur_id"), @JoinColumn(name = "ins_pla_dis_id") })
     @JsonIgnoreProperties("plan")
-    private ArrayList<Enrolment> enrolments;
+    private List<Enrolment> enrolments;
 
     public Plan() {
     }

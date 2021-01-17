@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +32,10 @@ public class Unit {
     @JoinColumn(name = "pla_dis_id")
     @JsonIgnoreProperties("unit")
     private List<Plan> plans;
+
+    @ManyToOne
+    @JoinColumn(name = "dis_dep_id")
+    private Department department;
 
     public Unit() {
     }
@@ -57,8 +62,7 @@ public class Unit {
         return plans;
     }
 
-    @Column(name = "dis_dep_id")
-    public int getDepartmentId() {
-        return 1;
+    public Department getDepartment() {
+        return department;
     }
 }

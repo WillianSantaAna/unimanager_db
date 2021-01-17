@@ -1,0 +1,32 @@
+main {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+main>section {
+    margin: 10px;
+    padding: 15px;
+    width: 300px;
+    background-color: darkblue;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-template-areas: "sem cre""name name";
+}
+
+.cre {
+    grid-area: cre;
+    background-color: lightseagreen;
+    color: darkblue;
+}
+
+.sem {
+    grid-area: sem;
+    background-color: lightgray;
+    color: darkblue;
+}
+
+.name {
+    grid-area: name;
+}

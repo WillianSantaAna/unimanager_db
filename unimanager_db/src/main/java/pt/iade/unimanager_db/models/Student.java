@@ -1,7 +1,7 @@
 package pt.iade.unimanager_db.models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "alunos")
@@ -38,17 +40,19 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "alu_cur_id")
+    @JsonIgnoreProperties("plans")
     private Course course;
 
     @OneToMany
     @JoinColumn(name = "ins_alu_id")
-    private ArrayList<Enrolment> enrolments;
+    @JsonIgnoreProperties("enrolments")
+    private List<Enrolment> enrolments;
 
     public Student() {
     }
 
     public Student(int id, String name, String address, LocalDate birthDate, char gender, String email, Course course,
-            ArrayList<Enrolment> enrolments) {
+            List<Enrolment> enrolments) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -87,7 +91,7 @@ public class Student {
         return course;
     }
 
-    public ArrayList<Enrolment> getEnrolments() {
+    public List<Enrolment> getEnrolments() {
         return enrolments;
     }
 }
