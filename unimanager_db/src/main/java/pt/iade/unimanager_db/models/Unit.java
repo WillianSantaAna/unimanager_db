@@ -20,16 +20,18 @@ public class Unit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dis_id")
     private int id;
+
     @Column(name = "dis_nome")
     private String name;
+
     @Column(name = "dis_creditos")
     private int credits;
+
     @OneToMany
     @JoinColumn(name = "pla_dis_id")
     @JsonIgnoreProperties("unit")
     private List<Plan> plans;
 
-    
     public Unit() {
     }
 

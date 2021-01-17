@@ -1,12 +1,16 @@
 package pt.iade.unimanager_db.models;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,22 +26,31 @@ public class Plan {
     @Column(name = "pla_cur_id")
     @JsonIgnore
     private int courseId;
+
+    @Id
+    @Column(name = "pla_dis_id")
+    @JsonIgnore
+    private int unitId;
+
+    @Column(name = "pla_semestre")
+    private int semester;
+
     @ManyToOne
     @MapsId("courseId")
     @JoinColumn(name = "pla_cur_id")
     @JsonIgnoreProperties("plans")
     private Course course;
-    @Column(name = "pla_semestre")
-    private int semester;
-    @Id
-    @Column(name = "pla_dis_id")
-    @JsonIgnore
-    private int unitId;
+
     @ManyToOne
     @MapsId("unitId")
     @JoinColumn(name = "pla_dis_id")
     @JsonIgnoreProperties("plans")
     private Unit unit;
+
+    @OneToMany
+    @JoinColumns({ @JoinColumn(name = "ins_pla_cur_id"), @JoinColumn(name = "ins_pla_dis_id") })
+    @JsonIgnoreProperties("plan")
+    private ArrayList<Enrolment> enrolments;
 
     public Plan() {
     }

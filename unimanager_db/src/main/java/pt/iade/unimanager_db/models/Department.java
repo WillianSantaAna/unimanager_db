@@ -1,41 +1,33 @@
 package pt.iade.unimanager_db.models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@Table(name = "cursos")
-public class Course {
+@Table(name = "departamentos")
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cur_id")
+    @Column(name = "dep_id")
     private int id;
 
-    @Column(name = "cur_nome")
+    @Column(name = "dep_nome")
     private String name;
     
-    @OneToMany
-    @JoinColumn(name = "pla_cur_id")
-    @JsonIgnoreProperties("course")
-    private List<Plan> plans;
+    @Column(name = "dep_sigla")
+    private char acronyms;
 
-    public Course() {
+    public Department() {
     }
 
-    public Course(int id, String name, List<Plan> plans) {
+    public Department(int id, String name, char acronyms) {
         this.id = id;
         this.name = name;
-        this.plans = plans;
+        this.acronyms = acronyms;
     }
 
     public int getId() {
@@ -46,7 +38,7 @@ public class Course {
         return name;
     }
 
-    public List<Plan> getPlans() {
-        return plans;
+    public char getAcronyms() {
+        return acronyms;
     }
 }
