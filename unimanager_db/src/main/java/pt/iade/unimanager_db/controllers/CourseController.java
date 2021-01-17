@@ -37,6 +37,7 @@ public class CourseController {
     public SimpleResult saveUnitInCourse(@RequestBody Plan plan) {
         logger.info("Adding unit with id " + plan.getUnit().getId());
         courseRepository.addUnitToCourse(plan);
+        
         return new SimpleResult("Added unit with id " + plan.getUnit().getId(), plan);
     }
 

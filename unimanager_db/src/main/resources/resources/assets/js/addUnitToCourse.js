@@ -15,25 +15,37 @@ window.onload = async function () {
         });
         for (let unit of units)
             if (!existingIds.includes(unit.id))
-                html += `<option value=${unit.id}>
-${unit.name} (${unit.credits} credits) </option>`;
+                html += `<option value=${unit.id}>${unit.name} (${unit.credits} credits) </option>`;
         document.getElementById("unit").innerHTML = html;
-    } catch (err) { console.log(err); }
+    } catch (err) {
+        console.log(err);
+    }
 }
+
 async function add() {
     let unitId = document.getElementById("unit").value;
     let semester = document.getElementById("semester").value;
     let data = {
-        course: { id: parseInt(courseId) },
-        unit: { id: parseInt(unitId) },
+        course: {
+            id: parseInt(courseId)
+        },
+        unit: {
+            id: parseInt(unitId)
+        },
         semester: parseInt(semester)
     };
+    
     try {
         let result = await $.ajax({
             url: `/api/courses/${courseId}/units`,
-            method: "post", data: JSON.stringuify(data),
-            dataType: "json", contentType: "application/json"
+            method: "post",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
         });
+
         document.getElementById("result").innerHTML = result.msg;
-    } catch (err) { console.log(err); }
+    } catch (err) {
+        console.log(err);
+    }
 }
