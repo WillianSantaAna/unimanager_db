@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import pt.iade.unimanager_db.models.ids.PlanId;
+
 @Entity
 @Table(name = "planoestudos")
 @IdClass(PlanId.class)
@@ -40,10 +42,12 @@ public class Plan {
     public Plan() {
     }
 
-    public Plan(int courseId, Course course, int semester) {
+    public Plan(int courseId, Course course, int semester, int unitId, Unit unit) {
         this.courseId = courseId;
         this.course = course;
         this.semester = semester;
+        this.unitId = unitId;
+        this.unit = unit;
     }
 
     public int getCourseId() {
@@ -56,5 +60,13 @@ public class Plan {
 
     public int getSemester() {
         return semester;
+    }
+
+    public int getUnitId() {
+        return unitId;
+    }
+
+    public Unit getUnit() {
+        return unit;
     }
 }

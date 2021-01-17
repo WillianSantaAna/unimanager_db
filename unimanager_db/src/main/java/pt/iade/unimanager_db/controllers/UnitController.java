@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pt.iade.unimanager_db.models.results.SimpleResult;
+import pt.iade.unimanager_db.models.views.UnitPlanView;
 import pt.iade.unimanager_db.models.Unit;
 import pt.iade.unimanager_db.models.exceptions.NotFoundException;
 import pt.iade.unimanager_db.models.repositories.UnitRepository;
@@ -61,5 +63,47 @@ public class UnitController {
     public Iterable<Unit> getUnit(@PathVariable(value = "text") String text) {
         logger.info("Unit with name like " + text);
         return unitRepository.findByNameContaining(text);
+    }
+
+    @GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Unit> searchUnits(@RequestParam(value = "name", defaultValue = "") String name,
+            @RequestParam(value = "creditsMin", defaultValue = "min") String creditsMin,
+            @RequestParam(value = "creditsMax", defaultValue = "max") String creditsMax) {
+        logger.info(
+                "Sending unit with name like " + name + " and credits between " + creditsMin + " and " + creditsMax);
+        int _creditMin = -1;
+        int _creditMax = Integer.MAX_VALUE;
+        try {
+            _creditMin = Integer.parseInt(creditsMin);
+        } catch (NumberFormatException e) {
+        }
+        try {
+            _creditMax = Integer.parseInt(creditsMax);
+        } catch (NumberFormatException e) {
+        }
+        return unitRepository.findByNameContainingAndCreditsBetween(name, _creditMin, _creditMax);
+    }
+
+    @GetMapping(path = "/plans/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<UnitPlanView> getUnitPlans() {
+        logger.info("Sending all plans of units");
+        return unitRepository.findAllUnitPlans();
+    }
+
+    @GetMapping(path = "/plans/{unitId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<UnitPlanView> getUnitPlan(@PathVariable int unitId) {
+        logger.info("Plans of unit with id " + unitId);
+        return unitRepository.findUnitPlansById(unitId);
+    }
+
+    @GetMapping(path = "/plans/{unitId}/{courseId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public UnitPlanView getUnitCoursePlan(@PathVariable int unitId, @PathVariable int courseId) {
+        logger.info("Sending plan of unit with id " + unitId + " in course with id " + courseId);
+        Optional<UnitPlanView> _unitPlan = unitRepository.findUnitPlanByUnitAndCourse(unitId, courseId);
+        if (_unitPlan.isEmpty())
+            throw new NotFoundException("(" + unitId + "," + courseId + ")", "Plan of Unit in Course",
+                    "(unitId,courseId)");
+        else
+            return _unitPlan.get();
     }
 }
