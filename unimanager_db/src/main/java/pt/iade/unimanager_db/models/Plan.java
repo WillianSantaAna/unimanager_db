@@ -1,5 +1,6 @@
 package pt.iade.unimanager_db.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -50,7 +51,7 @@ public class Plan {
     @OneToMany
     @JoinColumns({ @JoinColumn(name = "ins_pla_cur_id"), @JoinColumn(name = "ins_pla_dis_id") })
     @JsonIgnoreProperties("plan")
-    private List<Enrolment> enrolments;
+    private List<Enrolment> enrolments = new ArrayList<>();
 
     public Plan() {
     }
@@ -67,19 +68,23 @@ public class Plan {
         return courseId;
     }
 
-    public Course getCourse() {
-        return course;
+    public int getUnitId() {
+        return unitId;
     }
 
     public int getSemester() {
         return semester;
     }
 
-    public int getUnitId() {
-        return unitId;
+    public Course getCourse() {
+        return course;
     }
 
     public Unit getUnit() {
         return unit;
+    }
+
+    public List<Enrolment> getEnrolments() {
+        return enrolments;
     }
 }

@@ -1,7 +1,6 @@
 package pt.iade.unimanager_db.models;
 
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -24,15 +22,16 @@ public class Enrolment {
 
     @Column(name = "ins_dt_inscricao")
     private LocalDate enrolmentDate;
-    
+
     @Column(name = "ins_dt_avaliacao")
     private LocalDate examDate;
-    
+
     @Column(name = "ins_nota")
-    private double grade;
+    private Double grade;
 
     @ManyToOne
     @JoinColumn(name = "ins_alu_id")
+    @JsonIgnoreProperties({ "enrolments", "course" })
     private Student student;
 
     @ManyToOne
@@ -64,8 +63,12 @@ public class Enrolment {
         return examDate;
     }
 
-    public double getGrade() {
+    public Double getGrade() {
         return grade;
+    }
+
+    public void setGrade(Double grade) {
+        this.grade = grade;
     }
 
     public Student getStudent() {

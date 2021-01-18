@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/js/student.js"></script>
+    <title>University Manager</title>
+</head>
+
+<body>
+    <header>
+        <img src="assets/images/avatar.png" alt="Student Icon">
+        <section>
+            <h1> University Manager </h1>
+            <h3 id="student"> </h3>
+        </section>
+    </header>
+    <nav>
+        <a href="courses.html">List of Courses</a>
+    </nav>
+    <main>
+        <section id="studentInfo"></section>        
+        <form>
+            <label for="grade">Update Grade: </label>
+            <input type="number" id="grade" name="grade">
+            <input type="button" onclick="setGrade()" value="Submit">
+        </form>
+        <p id="response"></p>
+    </main>
+</body>
+
+</html>

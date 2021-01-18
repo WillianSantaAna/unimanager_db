@@ -44,7 +44,7 @@ async function add() {
             contentType: "application/json",
         });
 
-        document.getElementById("result").innerHTML = result.msg;
+        document.getElementById("result").innerHTML = result.result;
     } catch (err) {
         console.log(err);
     }

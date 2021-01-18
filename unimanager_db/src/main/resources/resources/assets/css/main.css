@@ -38,3 +38,7 @@ main {
     grid-area: m;
     color: darkblue;
 }
+
+.btn {
+    cursor: pointer;
+}

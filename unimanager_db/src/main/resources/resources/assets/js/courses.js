@@ -8,7 +8,7 @@ window.onload = async function () {
         });
         let html = "";
         for (let course of courses)
-            html += `<section class="btn-course" onclick="showCourse(${course.id})">${course.name}</section>`
+            html += `<section class="btn" onclick="showCourse(${course.id})">${course.name}</section>`
         elem.innerHTML = html;
     } catch (err) {
         console.log(err);

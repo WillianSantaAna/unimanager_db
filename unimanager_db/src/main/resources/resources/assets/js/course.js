@@ -10,19 +10,19 @@ window.onload = async function () {
         document.getElementById("course").innerHTML = course.name;
         let html = "";
         for (let plan of course.plans)
-            html += `<section onclick='showUnit(${plan.unit.id})'>
-                    <section class="sem">${plan.semester} Sem</section>
-                    <section class="cre">Credits ${plan.unit.credits}</section>
-                    <h3 class="name">${plan.unit.name}</h3>
+            html += `<section class="btn" onclick='showUnit(${plan.unit.id})'>
+                        <section class="sem">${plan.semester} Sem</section>
+                        <section class="cre">Credits ${plan.unit.credits}</section>
+                        <h3 class="name">${plan.unit.name}</h3>
                     </section>`
         elem.innerHTML = html;
     } catch (err) {
         console.log(err);
-        elem.innerHTML = "<h1> Page not vailable </h1>";
+        elem.innerHTML = "<h1> Page not available </h1>";
     }
 }
 
 function showUnit(id) {
     sessionStorage.setItem("unitId", id);
-    // Next steps here
+    window.location = "unit.html";
 }
